@@ -10,6 +10,7 @@ int main(int argc, char *argv[]) {
     printf("Before fork(). variable pid = %d, getpid()=%d, getppid()=%d\n", pid, getpid(), getppid());
     fflush(stdout);
     // TODO: Create a child process using fork() and store the return value in pid (~1 line)
+    pid = fork();
 
     if (pid < 0) {
         fprintf(stderr, "fork() Failed");
@@ -18,10 +19,12 @@ int main(int argc, char *argv[]) {
         // Child Process
         printf("Child Process. variable pid = %d, getpid()=%d, getppid()=%d\n", pid, getpid(), getppid());
         // TODO: Use exec() family to replace the current process image with "sleep", "20" (~1 line)
-        
+        execlp("sleep", "sleep", "20", NULL);
+
     } else {
         // TODO: Make the parent process wait for the child to complete (~1 line)
-        
+        waitpid(pid, NULL, 0);
+
         printf("Parent Process. variable pid = %d, getpid()=%d, getppid()=%d\n", pid, getpid(), getppid());
     }
     return 0;

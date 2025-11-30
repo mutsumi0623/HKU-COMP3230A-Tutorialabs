@@ -3,13 +3,15 @@
 #include <stdlib.h>
 
 int* initialize_array(int n){
-    int stack_arr[n];
+    int *stack_arr = malloc(n * sizeof(int));
+    if (stack_arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return NULL;
+    }
     for (int i = 0; i < n; i++) {
-        stack_arr[i] = 0;
+        stack_arr[i] = i * i;
     }
 
-    // Note: The following return is problematic because stack_arr is a
-    // local variable and will be deallocated once the function returns.
     return stack_arr;
 }
 int main(int argc, char *argv[]) {
@@ -29,5 +31,6 @@ int main(int argc, char *argv[]) {
     for(int i=0; i<n; i++){
         printf("%d\t", arr[i]);
     }
+    free(arr);
     return 0;
 }
