@@ -5,7 +5,8 @@
 int* initialize_array(int n){
     int *heap_arr = NULL;
     // TODO: 1. Allocate memory for 'n' integers using malloc. Assign the address to 'heap_arr'. (~1 line)
-    
+    heap_arr = (int *)malloc(n * sizeof(int));
+
     if (heap_arr == NULL) {
         printf("Memory allocation failed!\n");
         return NULL;  // Exit with an error code
@@ -13,7 +14,10 @@ int* initialize_array(int n){
 
     // TODO: 2. Use a loop to navigate through the array.
     // For each index 'i', set arr[i] to i * i (square of index). (~3 lines)
-        
+    for (int i = 0; i < n; i++) {
+        heap_arr[i] = i * i;
+    }
+
     return heap_arr;
 }
 
@@ -36,6 +40,7 @@ int main(int argc, char *argv[]) {
     }
 
     // TODO: 3. Free the dynamically allocated memory. (~1 line)
-    
+    free(arr);
+
     return 0;
 }
